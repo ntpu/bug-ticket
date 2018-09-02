@@ -1,0 +1,14 @@
+{
+  "name": "bug-ticket",
+  "version": "1.0.0",
+  "description": "This is a flight ticket crawler to crawl bug tickets.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Shih-Kai Lin",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^1.7.0"
+  }
+}
