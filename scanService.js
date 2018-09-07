@@ -1,10 +1,11 @@
 const puppeteer = require('puppeteer');
 
 const runExpedia = async (request) => {
-  const browser = await puppeteer.launch({headless: false});
+  const { options, body } = request;
+  const browser = await puppeteer.connect(options);
   const page = await browser.newPage();
   const hostname = 'https://www.expedia.com/Flights-Search';
-  const {departureDate, arrivalDate, cabinClass = 'business'} = request;
+  const {departureDate, arrivalDate, cabinClass = 'business'} = body;
   const pageUrl =
     hostname + '?flight-type=on&starDate=' + departureDate + '&endDate=' + arrivalDate + '&mode=search&' +
     'trip=roundtrip&' +
@@ -28,7 +29,7 @@ const runExpedia = async (request) => {
     });
   });
 
-  await browser.close();
+  page.close();
 
   const result = Array.from(flightList).filter(f => f.price).map(
     f => Object.assign({}, f, {
