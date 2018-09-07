@@ -1,15 +1,13 @@
 const puppeteer = require('puppeteer');
 
-(async () => {
+const xRay = async (startDate, endDate) => {
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
 
-  const host = 'https://www.expedia.com/Flights-Search';
-  const startDate = '10/02/2018';
-  const endDate = '10/11/2018';
+  const hostname = 'https://www.expedia.com/Flights-Search';
   const cabinClass = 'business';
   const pageUrl =
-    host + '?flight-type=on&starDate=' + startDate + '&endDate=' + endDate + '&mode=search&trip=roundtrip&' +
+    hostname + '?flight-type=on&starDate=' + startDate + '&endDate=' + endDate + '&mode=search&trip=roundtrip&' +
     'leg1=from:Los+Angeles,+CA+(LAX-Los+Angeles+Intl.),to:Taipei,+Taiwan+(TPE-All+Airports),departure:' + startDate +
     'TANYT&leg2=from:Taipei,+Taiwan+(TPE-All+Airports),to:Los+Angeles,+CA+(LAX-Los+Angeles+Intl.),departure:' +
     endDate + 'TANYT&passengers=children:0,adults:1,seniors:0,infantinlap:Y&options=cabinclass:' + cabinClass + ',';
@@ -37,4 +35,6 @@ const puppeteer = require('puppeteer');
   console.log(JSON.stringify(processedFlightList));
 
   await browser.close();
-})();
+};
+
+module.exports = { xRay };
